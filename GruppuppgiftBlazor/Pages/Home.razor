@@ -2,6 +2,32 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>List of Students</h1>
 
-Welcome to your new app.
+<input @bind="studentText" placeholder="Add Student..."/>  <!-- fält där användaren skriver in student--> 
+<button class="btn btn-primary" @onclick="AddStudent">Add Student</button> <!--knapp som lägger till student (kallar på metoden AddStudent) -->
+
+<ul> <!--Listan som användaren ser -->
+    @for (int i = 0; i < students.Count; i++) //for loop som går igenom och displayar listan
+    {
+        var index = i;
+        <li>
+            @students[index]
+        </li>
+    }
+</ul>
+
+@code
+{
+    private string studentText;  //Variabel där användarens input sparas
+    private List<string> students = new(); //Lista där studenter sparas
+
+    private void AddStudent() //metod för att lägga till student
+    {
+        if (!string.IsNullOrWhiteSpace(studentText))
+        {
+            students.Add(studentText);
+            studentText = string.Empty;
+        }
+    }
+}
