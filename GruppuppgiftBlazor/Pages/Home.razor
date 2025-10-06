@@ -13,6 +13,7 @@
         var index = i;
         <li>
             @students[index]
+            <button type="button" @onclick="@(() => RemoveStudent(index))">Remove</button> <!--knapp för att ta bort student (kallar på metoden RemoveStudent) -->
         </li>
     }
 </ul>
@@ -30,4 +31,13 @@
             studentText = string.Empty;
         }
     }
+
+    private void RemoveStudent(int index) // metod för att ta bort student
+    {
+        if (index >= 0 && index < students.Count)
+        {
+            students.RemoveAt(index);
+        }
+    }
+    
 }
