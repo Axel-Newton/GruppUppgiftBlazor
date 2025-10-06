@@ -4,12 +4,15 @@
 
 <h1>List of Students</h1>
 
-<input @bind="studentText" placeholder="Add Student..."/>  <!-- fält där användaren skriver in student--> 
-<button class="btn btn-primary" @onclick="AddStudent">Add Student</button> <!--knapp som lägger till student (kallar på metoden AddStudent) -->
+<input @bind="studentText" placeholder="Add Student..."/>   
+<input @bind="gradeText" placeholder="Add Grade..."/>
 
-<ul> <!--Listan som användaren ser -->
-    @for (int i = 0; i < students.Count; i++) //for loop som går igenom och displayar listan
+<button class="btn btn-primary" @onclick="AddStudent">Add Student and Grade</button> 
+
+<ul> 
+    @foreach (var student in student)
     {
+        <li>@student.Name (@student.Grade)</li>
         var index = i;
         <li>
             @students[index]
@@ -20,17 +23,30 @@
 
 @code
 {
-    private string studentText;  //Variabel där användarens input sparas
-    private List<string> students = new(); //Lista där studenter sparas
+    private string studentText;  
+    private string gradeText;
 
-    private void AddStudent() //metod för att lägga till student
+
+    private List<Student> student = new();
+    private void AddStudent() 
     {
         if (!string.IsNullOrWhiteSpace(studentText))
         {
-            students.Add(studentText);
+            student.Add(new Student
+            {
+                Name = studentText,
+                Grade = gradeText
+            });
             studentText = string.Empty;
+            gradeText = string.Empty;
         }
     }
+    public class Student
+    {
+    public string Name { get; set;  }
+    public string Grade { get; set; }
+    }
+
 
     private void RemoveStudent(int index) // metod för att ta bort student
     {
