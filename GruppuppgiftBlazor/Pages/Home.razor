@@ -7,7 +7,10 @@
 <input @bind="studentText" placeholder="Add Student..."/>   
 <input @bind="gradeText" placeholder="Add Grade..."/>
 
-<button class="btn btn-primary" @onclick="AddStudent">Add Student and Grade</button> 
+<button class="btn btn-primary" @onclick="AddStudent">Add Student and Grade</button>
+<button class="btn btn-primary" @onclick="SortByName">Sort by name</button>
+<button class="btn btn-primary" @onclick="SortByGrade">Sortera by grade</button>
+
 
 <ul> 
     @for (int i = 0; i < student.Count; i++)
@@ -54,5 +57,15 @@
             student.RemoveAt(index);
         }
     }
+    public void SortByName()
+    {
+        student = student.OrderBy(s => s.Name).ToList();
+    }
+
+    public void SortByGrade()
+    {
+        student = student.OrderBy(s => s.Grade).ToList();
+    }
+    
     
 }
