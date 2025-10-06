@@ -10,12 +10,11 @@
 <button class="btn btn-primary" @onclick="AddStudent">Add Student and Grade</button> 
 
 <ul> 
-    @foreach (var student in student)
+    @for (int i = 0; i < student.Count; i++)
     {
-        <li>@student.Name (@student.Grade)</li>
         var index = i;
         <li>
-            @students[index]
+            @student[index].Name (@student[index].Grade)
             <button type="button" @onclick="@(() => RemoveStudent(index))">Remove</button> <!--knapp för att ta bort student (kallar på metoden RemoveStudent) -->
         </li>
     }
@@ -50,9 +49,9 @@
 
     private void RemoveStudent(int index) // metod för att ta bort student
     {
-        if (index >= 0 && index < students.Count)
+        if (index >= 0 && index < student.Count)
         {
-            students.RemoveAt(index);
+            student.RemoveAt(index);
         }
     }
     
